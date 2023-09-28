@@ -126,5 +126,4 @@ python manage.py runserver
   - `urls.py` - Project-level URL configuration.
 ```
 
-Make sure to customize the details and paths of your project in these instructions. Once you've added this section to your README.md on GitHub, users should be able to follow these steps to download, set up, and start your project.
 
