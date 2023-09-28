@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<section>
+  <article>
+    <h1>All Reservations</h1>
+
+      <div class="row">
+        <!--Begin col-->
+        <div class="column">
+          <div id="table-container"></div>
+        </div>
+        <!--End col-->
+
+        <!--Begin col-->
+        <div class="column">
+          <div class="videowrap">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d11898.289517452584!2d-87.60853049433447!3d41.79442860243028!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x880e2912ce6f7027%3A0xc0cfb5545d4a37b2!2sHyde%20Park%2C%20Chicago%2C%20IL%2C%20USA!5e0!3m2!1sen!2spt!4v1662384760663!5m2!1sen!2spt"
+              width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"></iframe>
+          </div>
+        </div>
+        <!--End col-->
+      </div>
+
+  </article>
+ 
+</section>
+
+
+<!-- Add your code inside the script tags below  -->
+
+<script>
+  const bookings = JSON.parse('{{ bookings|safe|escapejs }}');
+  
+  // Función para crear una tabla HTML a partir de los datos JSON
+  function createTable(bookings) {
+    const table = document.createElement('table');
+    const thead = table.createTHead();
+    const tbody = table.createTBody();
+    
+    // Crea la fila de encabezados
+    const headerRow = thead.insertRow();
+    const headers = ['Name', 'Date','Slots']; 
+    
+    for (const header of headers) {
+      const th = document.createElement('th');
+      th.textContent = header;
+      headerRow.appendChild(th);
+    }
+    
+    // Itera sobre los datos y crea filas de datos
+    for (const booking of bookings) {
+      const row = tbody.insertRow();
+      const firstNameCell = row.insertCell(0);
+      const dateCell = row.insertCell(1);
+      const slotCell = row.insertCell(2);
+      
+      firstNameCell.textContent = booking.fields.first_name;
+      dateCell.textContent = booking.fields.reservation_date;
+      slotCell.textContent = booking.fields.reservation_slot;
+      
+
+    }
+    
+    return table;
+  }
+  
+  const table = createTable(bookings);
+  
+  // Selecciona el elemento donde quieres insertar la tabla (puedes cambiar el selector según tu HTML)
+  const tableContainer = document.getElementById('table-container');
+  
+  // Inserta la tabla en el contenedor
+  tableContainer.appendChild(table);
+</script>
+
+{% endblock %}
+<style>
+  /* Agrega margen entre las columnas en la clase .row */
+  .row {
+    display: flex;
+    margin: 0 -10px; /* Ajusta el margen según tus preferencias */
+  }
+
+  /* Estilo para cada columna individual */
+  .column {
+    flex: 1;
+    padding: 0 10px; /* Ajusta el margen según tus preferencias */
+  }
+</style>
