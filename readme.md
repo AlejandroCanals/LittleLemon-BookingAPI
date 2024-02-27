@@ -113,17 +113,4 @@ python manage.py runserver
 - Access the Little Lemon website and navigate to the "Book" tab to make reservations.
 - View the reservations on the "Bookings" page.
 
-## Folder Structure
-
-- `littlelemon` - The main project folder.
-  - `restaurant` - The app containing the booking functionality.
-    - `forms.py` - Contains the `BookingForm` class for form processing.
-    - `models.py` - Defines the `Booking` model.
-    - `views.py` - Contains view functions for the website.
-    - `urls.py` - App-level URL configuration.
-  - `templates` - Contains HTML templates for rendering pages.
-  - `settings.py` - Project settings.
-  - `urls.py` - Project-level URL configuration.
-```
-
 
